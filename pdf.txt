@@ -1,0 +1,54 @@
+Malawi District Graph Visualization: Problem Analysis & Algorithm Implementation
+
+---------------------------------------------------------
+Problem Analysis
+---------------------------------------------------------
+Given:
+- A list of Malawi districts (nodes), each with an initial (x, y) position in the [0, 1] unit square.
+- An adjacency list (edges) describing which districts are connected.
+
+Goal:
+- Compute optimized (x, y) positions for each district such that:
+  - The layout is visually clear (minimal overlap, clear connections).
+  - All nodes remain within the [0, 1] unit square.
+  - The result can be visualized and the new positions output.
+
+---------------------------------------------------------
+Algorithm Implementation (Step by Step)
+---------------------------------------------------------
+
+1. **Data Preparation**
+   - The input data is structured as a `graph` object with:
+     - `nodes`: Each node has an `id`, and initial `x`, `y` in [0, 1].
+     - `edges`: Each edge is a pair of connected district ids.
+
+2. **Force-Directed Layout**
+   - We use D3.js's force simulation to optimize node positions.
+   - Forces used:
+     - `forceLink`: Keeps connected nodes at a preferred distance.
+     - `forceManyBody`: Repels nodes from each other to reduce overlap.
+     - `forceCenter`: Keeps the graph centered in [0, 1] space.
+     - `forceCollide`: Adds extra spacing to prevent node overlap.
+
+3. **Clamping**
+   - On every simulation tick, node positions are clamped to [0, 1] to ensure all nodes remain within the unit square.
+
+4. **Visualization**
+   - D3.js scales map [0, 1] coordinates to SVG pixel space for display.
+   - Nodes are drawn as circles, edges as lines, and labels are shown below each node.
+   - Interactive features:
+     - Dragging nodes to reposition them.
+     - Highlighting a node and its neighbors on hover (gold for hovered, blue for neighbors).
+     - Zoom and pan support.
+
+5. **Output**
+   - When the simulation ends, the optimized (x, y) positions for each node are printed to the console.
+   - These positions can be used for further analysis or exported as needed.
+
+---------------------------------------------------------
+Summary
+---------------------------------------------------------
+- The algorithm reads the adjacency list and initial positions.
+- It applies a force-directed layout to optimize positions.
+- It ensures all nodes stay within the [0, 1] unit square.
+- The result is visualized and the new positions are output for each district.
